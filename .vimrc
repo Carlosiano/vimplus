@@ -1,3 +1,11 @@
+" auto-install vim-plug
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  "autocmd VimEnter * PlugInstall
+  "autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
 "   .  . .  .  . .  . S@t.. .  .  . .  .  . .  .  . .  .  . .  .  . .  .  . .  .  . .  .  . .  .  . .  .  . .  .  . .  ..
 "    .     ..t%SXSS%:;t.X8S% .   .      .       .       .       .       .       .       .       .       .       .       .
 "      . %St8;8:X;8:8:8%8;%%:@S:    . .    . .    ....    .  .    .  .    .  .    .  .    .  .    .  .    .  .    .  ....
@@ -121,8 +129,12 @@ command! -nargs=1 -bar UnPlug call s:deregister(<args>)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 插件列表
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-call plug#begin('~/.vim/plugged')
+call plug#begin('/home/carlosiano/.config/nvim/autoload/plugged')
 
+Plug 'preservim/nerdtree'
+Plug 'gmoe/vim-espresso'
+Plug 'morhetz/gruvbox'
+Plug 'mangeshrex/uwu.vim'
 Plug 'chxuan/cpp-mode'
 Plug 'chxuan/vim-edit'
 Plug 'chxuan/change-colorscheme'
@@ -130,7 +142,6 @@ Plug 'chxuan/prepare-code'
 Plug 'chxuan/vim-buffer'
 Plug 'chxuan/vimplus-startify'
 Plug 'preservim/tagbar'
-Plug 'Valloric/YouCompleteMe'
 Plug 'Yggdroot/LeaderF'
 Plug 'mileszs/ack.vim'
 Plug 'easymotion/vim-easymotion'
@@ -146,7 +157,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-endwise'
 Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'vim-airline/vim-airline'
+Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/vim-slash'
@@ -161,12 +172,31 @@ Plug 'terryma/vim-smooth-scroll'
 Plug 'rhysd/clever-f.vim'
 Plug 'vim-scripts/indentpython.vim'
 
+
+" ------ my install ------
+Plug 'artanikin/vim-synthwave84'
+Plug 'joshdick/onedark.vim'
+Plug 'valloric/youcompleteme'
+Plug 'wincent/command-t'
+Plug 'scrooloose/syntastic'
+Plug 'junegunn/seoul256.vim'
+Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plug 'tpope/vim-fugitive'
+Plug 'rust-lang/rust.vim'
+
+" ------ my install disable ------
+Plug 'neoclide/coc.nvim'
+
+
+
+
+
 " 加载自定义插件
 if filereadable(expand($HOME . '/.vimrc.custom.plugins'))
     source $HOME/.vimrc.custom.plugins
 endif
 
-call plug#end()  
+call plug#end()
 
 " load vim default plugin
 runtime macros/matchit.vim
@@ -208,10 +238,10 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "
 " 主题设置
 set background=dark
 let g:onedark_termcolors=256
-colorscheme onedark
+colorscheme synthwave84
 
 " airline
-let g:airline_theme="onedark"
+let g:airline_theme="synthwave84"
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 if !exists('g:airline_symbols')
@@ -243,7 +273,7 @@ nnoremap <silent> <F12> :ShowColorScheme<cr>
 inoremap <silent> <F12> <esc> :ShowColorScheme<cr>
 
 " prepare-code
-let g:prepare_code_plugin_path = expand($HOME . "/.vim/plugged/prepare-code")
+let g:prepare_code_plugin_path = expand("/home/carlosiano/.config/nvim/autoload/plugged/prepare-code")
 
 " vim-buffer
 nnoremap <silent> <c-p> :PreviousBuffer<cr>
@@ -269,7 +299,8 @@ let g:NERDTreeDirArrowCollapsible='▼'
 
 " YCM
 " 如果不指定python解释器路径，ycm会自己搜索一个合适的(与编译ycm时使用的python版本匹配)
-" let g:ycm_server_python_interpreter = '/usr/bin/python2.7'
+"let g:ycm_server_python_interpreter = 'D:/app installed/python/3.10/python'
+let g:ycm_log_level = 'debug'
 let g:ycm_confirm_extra_conf = 0 
 let g:ycm_error_symbol = '✗'
 let g:ycm_warning_symbol = '✹'
@@ -359,4 +390,4 @@ if filereadable(expand($HOME . '/.vimrc.custom.config'))
     source $HOME/.vimrc.custom.config
 endif
 
-
+hi Normal guibg=NONE ctermbg=NONE
