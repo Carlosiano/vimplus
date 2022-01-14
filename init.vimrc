@@ -129,7 +129,7 @@ command! -nargs=1 -bar UnPlug call s:deregister(<args>)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 插件列表
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-call plug#begin('/home/carlosiano/.config/nvim/autoload/plugged')
+call plug#begin('~/.config/nvim/autoload/plugged')
 
 Plug 'preservim/nerdtree'
 Plug 'gmoe/vim-espresso'
@@ -174,7 +174,7 @@ Plug 'vim-scripts/indentpython.vim'
 
 
 " ------ my install ------
-Plug 'artanikin/vim-synthwave84'
+Plug 'Carlosiano/vim-synthwave84'
 Plug 'joshdick/onedark.vim'
 Plug 'valloric/youcompleteme'
 Plug 'wincent/command-t'
@@ -273,7 +273,7 @@ nnoremap <silent> <F12> :ShowColorScheme<cr>
 inoremap <silent> <F12> <esc> :ShowColorScheme<cr>
 
 " prepare-code
-let g:prepare_code_plugin_path = expand("/home/carlosiano/.config/nvim/autoload/plugged/prepare-code")
+let g:prepare_code_plugin_path = expand($HOME . "/.config/nvim/autoload/plugged/prepare-code")
 
 " vim-buffer
 nnoremap <silent> <c-p> :PreviousBuffer<cr>
